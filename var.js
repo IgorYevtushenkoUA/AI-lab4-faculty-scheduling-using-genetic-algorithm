@@ -1,0 +1,3 @@
+let VAR = {
+    myvalue: "Yeah!"
+};

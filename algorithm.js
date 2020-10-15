@@ -1,6 +1,8 @@
+import {discipline_data} from "./data/discipline_data.js";
+
 let schedules = []
 
-console.log(test_data)
+console.log(discipline_data)
 
 function generateFirstPlural() {}
 function findBestOffSpring(){}

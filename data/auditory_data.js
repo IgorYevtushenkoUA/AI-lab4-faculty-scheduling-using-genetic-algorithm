@@ -1,5 +1,7 @@
 //l - lecture | p-practice
-let auditory_data = [
+import {Auditory} from "../plurals/Auditory.js";
+
+export const auditory_data = [
     new Auditory(0, "2-225", 40,"l"),
     new Auditory(1, "3-313", 80, "l/p"),
     new Auditory(2 ,"1-114", 25, "p"),

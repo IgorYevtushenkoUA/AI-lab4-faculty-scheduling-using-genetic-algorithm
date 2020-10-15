@@ -1,4 +1,6 @@
-let course_data = {
+import {Course} from "../plurals/Course.js";
+
+export const course_data = {
     "IPZ": new Course(0, "IPZ", [
         "Haskell",
         "Methods of object-oriented programming",

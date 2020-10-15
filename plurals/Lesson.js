@@ -1,6 +1,6 @@
 // Chromosome === Lesson
 
-class Lesson {
+export class Lesson {
     constructor(id, discipline, disciplineType,teacher, group, auditory, weekDay, pairTime) {
         this._lessonID = id
         this._lessonDiscipline = discipline

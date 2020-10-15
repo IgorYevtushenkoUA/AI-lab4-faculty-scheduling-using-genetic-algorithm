@@ -1,4 +1,6 @@
-let discipline_data = {
+import {Discipline} from "../plurals/Discipline.js";
+
+export const discipline_data = {
     "Haskell": [new Discipline(0, "Haskell", 10, 1, 10, 1)],
     "Methods of object-oriented programming": [new Discipline(1, "Methods of object-oriented programming", 10, 1, 10, 1)],
     "System programming": [new Discipline(2, "System programming", 10, 1, 10, 1)],

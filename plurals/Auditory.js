@@ -1,4 +1,4 @@
-class Auditory {
+export class Auditory {
     constructor(auditoryId, auditoryNumber, auditoryCapacity, auditoryType) {
         this._auditoryId = auditoryId;
         this._auditoryNumber = auditoryNumber;

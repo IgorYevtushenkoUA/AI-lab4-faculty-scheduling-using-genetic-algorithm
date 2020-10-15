@@ -1,4 +1,4 @@
-class StudentsGroup {
+export class StudentsGroup {
     constructor(id, name, size, courseName) {
         this._studentGroupID = id
         this._studentGroupName = name;

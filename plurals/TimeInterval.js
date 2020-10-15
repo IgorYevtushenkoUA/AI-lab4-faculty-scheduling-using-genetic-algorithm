@@ -1,4 +1,4 @@
-class TimeInterval {
+export class TimeInterval {
     constructor(weekNum, weekDay, maxDayLessons) {
         this._weekNum = weekNum
         this._weekDay = weekDay

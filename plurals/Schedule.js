@@ -1,4 +1,4 @@
-class Schedule {
+export class Schedule {
 
     constructor(id,lessons) {
         this._scheduleID = id;

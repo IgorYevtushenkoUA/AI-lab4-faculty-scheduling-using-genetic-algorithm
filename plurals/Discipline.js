@@ -1,4 +1,4 @@
-class Discipline {
+export class Discipline {
     constructor(disciplineId, disciplineName, numOfDisciplineLecture, numOfDisciplineLecturePerWeek, numOfDisciplinePractice, numOfDisciplinePracticePerWeek) {
         this._disciplineId = disciplineId;
         this._disciplineName = disciplineName
