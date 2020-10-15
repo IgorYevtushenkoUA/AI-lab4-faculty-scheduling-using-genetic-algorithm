@@ -1,4 +1,4 @@
-const teachers_data = {
+let teachers_data = {
     "V.S. Protsenko"    : new Teacher(0, "V.S. Protsenko", ["Haskell"], 'l/p'),
     "V.V. Bublyk"       : new Teacher(1, "V.V. Bublyk", ["Methods of object-oriented programming", "l/p"], "l/p"),
     "O.P. Zhezherun"    : new Teacher(2, "O.P. Zhezherun", ["System programming"], "l/p"),

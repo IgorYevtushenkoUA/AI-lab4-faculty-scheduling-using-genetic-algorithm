@@ -1,9 +1,9 @@
 class Course {
-    constructor(id, name, size, subjects) {
+    constructor(id, name, size, disciplines) {
         this._courseID = id;
         this._courseName = name;
         this._courseSize = size;
-        this._courseSubjects = subjects
+        this._coursedisciplines = disciplines
     }
 
     get getCourseID() {
@@ -18,8 +18,8 @@ class Course {
         return this._courseSize
     }
 
-    get getCourseSubjects() {
-        return this._courseSubjects
+    get getCourseDisciplines() {
+        return this._coursedisciplines
     }
 
     set setCourseID(id) {
@@ -34,7 +34,7 @@ class Course {
         this._courseSize = size;
     }
 
-    set setCourseSubjects(subjects) {
-        this._courseSubjects = subjects
+    set setCourseDisciplines(disciplines) {
+        this._coursedisciplines = disciplines
     }
 }

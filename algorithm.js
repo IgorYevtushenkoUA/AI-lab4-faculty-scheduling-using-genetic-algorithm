@@ -1,11 +1,9 @@
-let schedules = [
+let schedules = []
 
-]
+console.log(test_data)
 
-function generatePlural() {
-
-}
-function findBestOffspring(){}
+function generateFirstPlural() {}
+function findBestOffSpring(){}
 function multiply(){}
 function mutation(){}
 function selection(){}
