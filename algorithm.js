@@ -1,3 +1,7 @@
+let schedules = [
+
+]
+
 function generatePlural() {
 
 }
