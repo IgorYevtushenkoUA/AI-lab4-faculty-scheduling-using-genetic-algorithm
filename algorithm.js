@@ -1,7 +1,7 @@
 import {data_discipline_arr} from "./data/data_discipline.js";
 import {data_teachers_arr} from "./data/data_teacher.js";
 import {data_course_arr} from "./data/data_course.js";
-import {data_auditory} from "./data/data_auditory.js";
+import {data_auditory_arr} from "./data/data_auditory.js";
 import {Discipline} from "./plurals/Discipline.js";
 import {Lesson} from "./plurals/Lesson.js";
 import {StudentsGroup} from "./plurals/StudentsGroup.js";
@@ -10,14 +10,19 @@ import {Schedule} from "./plurals/Schedule.js";
 
 'use strict'
 let schedulesList = []
+let fines = []
 const OFFSETS = 2
 const GENERATION = 100
 
 // let teacher = data_teachers_arr[]
 function getRandomElem(data) {
-    return Math.floor(Math.random() * data_teachers_arr.length)
+    return Math.floor(Math.random() * data.length)
 }
 
+/**
+ * generate first generation
+ * chromosome looks like [disciplineName, {p or l}, teacher, group, auditory, timeInterval]
+  */
 function generateFirstGeneration() {
     for (let offset = 0; offset < OFFSETS; offset++) {
         let schedule = []
@@ -37,15 +42,15 @@ function generateFirstGeneration() {
                 let teacher = data_teachers_arr[getRandomElem(data_teachers_arr)]
                 // Group
                 let groupName = disciplineName + "(" + disciplineType + ") - " + id
-                let group = new StudentsGroup(id, groupName, 30, data_course_arr[getRandomElem(data_course_arr)])
+                let group = new StudentsGroup(id, groupName, 30, data_course_arr[getRandomElem(data_course_arr)].getCourseName)
                 // Auditory
-                let auditory = getRandomElem(data_auditory)
+                let auditory = data_auditory_arr[getRandomElem(data_auditory_arr)]
                 // TimeInterval
                 let week = Math.floor(Math.random() * 6)
                 let pair = Math.floor(Math.random() * 7)
                 let timeInterval = new TimeInterval(1, week, pair)
                 // Lesson
-                let lesson = new Lesson(id, discipline, disciplineType, teacher, group, auditory, timeInterval)
+                let lesson = new Lesson(id, disciplineName, disciplineType, teacher.getTeacherName, group, auditory.getAuditoryName, timeInterval.getWeekDay, timeInterval.getMaxDayLessons)
                 //Schedule
                 console.log(lesson)
                 schedule.push(new Schedule(id, lesson))
@@ -55,8 +60,16 @@ function generateFirstGeneration() {
     }
 }
 
+/**
+ * count fines in schedule to know how bad schedule at the moment */
+function countFines() {
+    for (let i = 0 ; i < schedulesList.length; i++){
+
+    }
+}
+
 generateFirstGeneration()
-console.log(schedulesList)
+
 
 function findBestOffSpring() {
 }
