@@ -14,7 +14,7 @@ import {Fine} from "./Fine.js"
 
 let schedulesList = []
 let fines = new Map()
-const OFFSETS = 2
+const OFFSETS = 10
 const GENERATION = 100
 
 // let teacher = data_teachers_arr[]
@@ -84,12 +84,21 @@ function countFitness() {
                 carma += fine.isUniqueAuditoryForDisciplineAtPairOnDay(lesson, lesson2)
             }
         }
-        fines.set(i,carma)
+        fines.set(i, carma)
     }
+}
+
+/**
+ * @returns {Map<index, carma{fitness}>} */
+function sortFines() {
+    return new Map([...fines.entries()].sort((a, b) => -1*(a[1] - b[1])))
 }
 
 generateFirstGeneration()
 countFitness()
+console.log(fines);
+console.log(sortFines(fines))
+
 
 function findBestOffSpring() {
 }
