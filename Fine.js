@@ -28,8 +28,6 @@ export class Fine {
     isCorrectTeacherForDiscipline(l1) {
         let teacherName = l1.getLessonTeacher
         let disciplineName = l1.getLessonDiscipline
-        console.log(data_teachers_map[teacherName])
-
         return data_teachers_map[teacherName].getTeacherSubjects.includes(disciplineName)
     }
 
@@ -83,8 +81,26 @@ export class Fine {
      */
     isUniqueAuditoryForDisciplineAtPairOnDay(l1, l2) {
         return !(l1.getLessonAuditory === l2.getLessonAuditory &&
-                l1.getLessonDay === l2.getLessonDay &&
-                l1.getLessonPair === l2.getLessonPair)
+            l1.getLessonDay === l2.getLessonDay &&
+            l1.getLessonPair === l2.getLessonPair)
 
     }
+
+    /**
+     * @param {Lesson} l1
+     * @param {Lesson} l2
+     */
+    isDifferentDay(lesson1, lesson2) {
+        return lesson1.getLessonDay === lesson2.getLessonDay
+    }
+
+    /**
+     * @param {Lesson} l1
+     * @param {Lesson} l2
+     */
+    isDifferentPair(lesson1, lesson2) {
+        return lesson1.getLessonPair === lesson2.getLessonPair
+    }
+
+
 }
