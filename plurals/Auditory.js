@@ -6,37 +6,15 @@ export class Auditory {
         this._auditoryType = auditoryType
     }
 
-    getAuditoryID() {
-        return this._auditoryId
-    }
+    getAuditoryID()         {return this._auditoryId}
+    setAuditoryID(id)       {this._auditoryId = id}
+    getAuditoryNumber()     {return this._auditoryNumber}
+    getAuditoryType()       {return this._auditoryType}
 
-    setAuditoryID(id) {
-        this._auditoryId = id
-    }
-
-    getAuditoryNumber() {
-        return this._auditoryNumber
-    }
-
-    setAuditoryNumber(num) {
-        this._auditoryNumber = num
-    }
-
-    getAuditoryCapacity() {
-        return this._auditoryCapacity
-    }
-
-    setAuditoryCapacity(capacity) {
-        this._auditoryCapacity = capacity
-    }
-
-    getAuditoryType() {
-        return this._auditoryType
-    }
-
-    setAuditoryType(type) {
-        this._auditoryType = type
-    }
+    setAuditoryNumber(num)          {this._auditoryNumber = num}
+    getAuditoryCapacity()           {return this._auditoryCapacity}
+    setAuditoryCapacity(capacity)   {this._auditoryCapacity = capacity}
+    setAuditoryType(type)           {this._auditoryType = type}
 
 
 }

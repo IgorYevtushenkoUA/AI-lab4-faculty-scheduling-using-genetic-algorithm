@@ -6,35 +6,13 @@ export class Course {
         this._coursedisciplines = disciplines
     }
 
-    get getCourseID() {
-        return this._courseID
-    }
+    get getCourseID()           {return this._courseID}
+    get getCourseName()         {return this._courseName}
+    get getCourseSize()         {return this._courseSize}
+    get getCourseDisciplines()  {return this._coursedisciplines}
 
-    get getCourseName() {
-        return this._courseName
-    }
-
-    get getCourseSize() {
-        return this._courseSize
-    }
-
-    get getCourseDisciplines() {
-        return this._coursedisciplines
-    }
-
-    set setCourseID(id) {
-        this._courseID = id
-    }
-
-    set setCourseName(name) {
-        this._courseName = name
-    }
-
-    set setCourseSize(size) {
-        this._courseSize = size;
-    }
-
-    set setCourseDisciplines(disciplines) {
-        this._coursedisciplines = disciplines
-    }
+    set setCourseID(id)                     {this._courseID = id}
+    set setCourseName(name)                 {this._courseName = name}
+    set setCourseSize(size)                 {this._courseSize = size;}
+    set setCourseDisciplines(disciplines)   {this._coursedisciplines = disciplines}
 }
