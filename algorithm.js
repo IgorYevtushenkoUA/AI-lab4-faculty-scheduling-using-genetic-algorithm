@@ -7,10 +7,13 @@ import {Lesson} from "./plurals/Lesson.js";
 import {StudentsGroup} from "./plurals/StudentsGroup.js";
 import {TimeInterval} from "./plurals/TimeInterval.js";
 import {Schedule} from "./plurals/Schedule.js";
+import {Fine} from "./Fine.js"
+
 
 'use strict'
+
 let schedulesList = []
-let fines = []
+let fines = new Map()
 const OFFSETS = 2
 const GENERATION = 100
 
@@ -22,7 +25,7 @@ function getRandomElem(data) {
 /**
  * generate first generation
  * chromosome looks like [disciplineName, {p or l}, teacher, group, auditory, timeInterval]
-  */
+ */
 function generateFirstGeneration() {
     for (let offset = 0; offset < OFFSETS; offset++) {
         let schedule = []
@@ -58,18 +61,35 @@ function generateFirstGeneration() {
         }
         schedulesList.push(schedule)
     }
+    console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
 }
 
 /**
- * count fines in schedule to know how bad schedule at the moment */
-function countFines() {
-    for (let i = 0 ; i < schedulesList.length; i++){
-
+ * count fitness in schedule to know how bad schedule at the moment */
+function countFitness() {
+    for (let i = 0; i < schedulesList.length; i++) {
+        let fine = new Fine()
+        let schedule = schedulesList[i]
+        let carma = 0
+        for (let j = 0; j < schedule.length; j++) {
+            let lesson = schedule[i].getScheduleLessons
+            carma += fine.isCorrectTeacherForDiscipline(lesson) ? 1 : 0
+            carma += fine.isCorrectTeacherForTypeOfDiscipline(lesson) ? 1 : 0
+            carma += fine.isCorrectAuditoryTypeForDisciplineType(lesson) ? 1 : 0
+            carma += fine.isCorrectAuditorySizeForStudentsGroupSize(lesson) ? 1 : 0
+            carma += fine.isCorrectDisciplineForStudentGroup(lesson) ? 1 : 0
+            for (let k = 0; k < schedule[i].length - 1; k++) {
+                let lesson2 = schedule[i]
+                if (fine.isSameLesson(lesson, lesson2)) continue
+                carma += fine.isUniqueAuditoryForDisciplineAtPairOnDay(lesson, lesson2)
+            }
+        }
+        fines.set(i,carma)
     }
 }
 
 generateFirstGeneration()
-
+countFitness()
 
 function findBestOffSpring() {
 }

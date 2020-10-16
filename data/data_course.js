@@ -1,7 +1,7 @@
 import {Course} from "../plurals/Course.js";
 
 export const data_course_map = {
-    "IPZ": new Course(0, "IPZ", [
+    "IPZ": new Course(0, "IPZ", 60,[
         "Haskell",
         "Methods of object-oriented programming",
         "System programming","Basic network technologies",
@@ -10,7 +10,7 @@ export const data_course_map = {
         "Multimedia technology",
         "Applied architecture enterprise level programs in Java",
         "Databases"]),
-    "KNIT": new Course(0, "KNIT", [
+    "KNIT": new Course(0, "KNIT", 50,[
         "Haskell",
         "Front-end Back-end technology web applications",
         "Probability theory and mathematical statistics",
