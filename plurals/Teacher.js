@@ -6,13 +6,13 @@ export class Teacher {
         this._whatTeacherDo = whatDo
     }
 
-    getTeacherID = function ()          {return this._teacherId;}
-    getTeacherName = function ()        {return this._teacherName;}
-    getTeacherSubjects = function ()    {return this._subjectList}
-    getTeacherWhatDo()                  {return this._whatTeacherDo}
+    get getTeacherID ()          {return this._teacherId;}
+    get getTeacherName ()        {return this._teacherName;}
+    get getTeacherSubjects ()    {return this._subjectList}
+    get getTeacherWhatDo()       {return this._whatTeacherDo}
 
-    setTeacherID = function (teacherId)         {this._teacherId = teacherId}
-    setTeacherName = function (teacherName)     {this._teacherName = teacherName;}
-    setTeacherSubjects = function (subjects)    {this._subjectList = subjects;}
-    setTeacherWhatDo(activities)                {this._whatTeacherDo = activities}
+    set setTeacherID (teacherId)         {this._teacherId = teacherId}
+    set setTeacherName (teacherName)     {this._teacherName = teacherName;}
+    set setTeacherSubjects (subjects)    {this._subjectList = subjects;}
+    set setTeacherWhatDo(activities)     {this._whatTeacherDo = activities}
 }
