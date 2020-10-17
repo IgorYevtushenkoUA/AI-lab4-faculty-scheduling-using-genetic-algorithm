@@ -1,6 +1,6 @@
 import {data_discipline_arr} from "./data/data_discipline.js";
 import {data_teachers_arr} from "./data/data_teacher.js";
-import {data_course_arr} from "./data/data_course.js";
+import {data_course_arr, data_course_map} from "./data/data_course.js";
 import {data_auditory_arr} from "./data/data_auditory.js";
 import {Discipline} from "./plurals/Discipline.js";
 import {Lesson} from "./plurals/Lesson.js";
@@ -16,7 +16,7 @@ let schedulesList = []
 let fines = new Map()
 const OFFSETS = 10
 const BEST_OFFSETS = OFFSETS / 2
-const GENERATION_EVOLUTION = 20
+const GENERATION_EVOLUTION = 10
 
 /**
  * @param {[]} data
@@ -55,7 +55,9 @@ function generateFirstGeneration() {
                 let teacher = data_teachers_arr[getRandomElem(data_teachers_arr)]
                 // Group
                 let groupName = disciplineName + "(" + disciplineType + ") - " + id
-                let group = new StudentsGroup(id, groupName, 30, data_course_arr[getRandomElem(data_course_arr)].getCourseName)
+                let groupCourseName = data_course_arr[getRandomElem(data_course_arr)].getCourseName
+                let groupSize = data_course_map[groupCourseName].getCourseSize
+                let group = new StudentsGroup(id, groupName, groupSize, groupCourseName)
                 // Auditory
                 let auditory = data_auditory_arr[getRandomElem(data_auditory_arr)]
                 // TimeInterval
@@ -82,16 +84,16 @@ function countFitness() {
         let carma = 0
         for (let j = 0; j < schedule.length; j++) {
             let lesson = schedule[i].getScheduleLessons
-            carma += fine.isCorrectTeacherForDiscipline(lesson) ? 1 : 0
-            carma += fine.isCorrectTeacherForTypeOfDiscipline(lesson) ? 1 : 0
-            carma += fine.isCorrectAuditoryTypeForDisciplineType(lesson) ? 1 : 0
-            carma += fine.isCorrectAuditorySizeForStudentsGroupSize(lesson) ? 1 : 0
-            carma += fine.isCorrectDisciplineForStudentGroup(lesson) ? 1 : 0
+            carma += fine.isCorrectTeacherForDiscipline(lesson) ? 1 : -1
+            carma += fine.isCorrectTeacherForTypeOfDiscipline(lesson) ? 1 : -1
+            carma += fine.isCorrectAuditoryTypeForDisciplineType(lesson) ? 1 : -1
+            carma += fine.isCorrectAuditorySizeForStudentsGroupSize(lesson) ? 1 : -1
+            carma += fine.isCorrectDisciplineForStudentGroup(lesson) ? 1 : -1
             // todo check  {schedule[i].length or schedule.length}
             for (let k = 0; k < schedule.length - 1; k++) {
                 let lesson2 = schedule[k]
                 if (fine.isSameLesson(lesson, lesson2)) continue
-                carma += fine.isUniqueAuditoryForDisciplineAtPairOnDay(lesson, lesson2)
+                carma += fine.isUniqueAuditoryForDisciplineAtPairOnDay(lesson, lesson2) ? 1 : -1
             }
         }
         fines.set(i, carma)
@@ -224,5 +226,13 @@ scheduleMutation()
 console.log("≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈")
 }
 countFitness()
-console.log("fines :: " + Array.from(fines)[0])
+console.log("The best schedule has VALUE{FITNESS} :: " + Array.from(fines)[0][1])
+let bestSchedule = schedulesList[Array.from(fines)[0][0]]
+console.log(123)
+
+console.log(bestSchedule)
+
+
+console.log(123)
+
 
