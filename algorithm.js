@@ -18,6 +18,67 @@ const OFFSETS = 10
 const BEST_OFFSETS = OFFSETS / 2
 const GENERATION_EVOLUTION = 10
 
+function getDay(num) {
+    switch (num) {
+        case 0 :
+            return "Monday"
+        case 1 :
+            return "Tuesday"
+        case 2 :
+            return "Wednesday"
+        case 3 :
+            return "Thursday"
+        case 4 :
+            return "Friday"
+        case 5 :
+            return "Saturday"
+    }
+}
+
+function getPair(num) {
+    switch (num) {
+        case 0 :
+            return "Para 1"
+        case 1 :
+            return "Para 2"
+        case 2 :
+            return "Para 3"
+        case 3 :
+            return "Para 4"
+        case 4 :
+            return "Para 5"
+        case 5 :
+            return "Para 6"
+        case 6 :
+            return "Para 7"
+    }
+}
+
+function printSchedule(schedule) {
+    let lessons = schedule.getScheduleLessons
+    for (let course = 0; course < data_course_arr.length; course++) {
+        console.log( "\n" + data_course_arr[course].getCourseName)
+        for (let day = 0; day < 6; day++) {
+            console.log(getDay(day))
+            for (let pair = 0; pair < 7; pair++) {
+                let auditory = "~~~"
+                let discipline = "~~~"
+                for (let lesson = 0; lesson < lessons.length ; lesson++){
+                    if (lessons[lesson].getLessonGroup.getStudentGroupCourseName === data_course_arr[course].getCourseName) {
+                        if (lessons[lesson].getLessonDay === day){
+                            if (lessons[lesson].getLessonPair === pair){
+                                auditory = lessons[lesson].getLessonAuditory
+                                discipline = lessons[lesson].getLessonDiscipline + " - (" + lessons[lesson].getLessonDisciplineType + ")"
+                                console.log(getPair(pair) + " | Auditory :: " + auditory + "\t| Discipline :: " + discipline)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
 /**
  * @param {[]} data
  * @returns {number}
@@ -73,7 +134,7 @@ function generateFirstGeneration() {
                 // schedule.push(new Schedule(id, lesson))
             }
         }
-        schedulesList.push(new Schedule(offset,lessonsList))
+        schedulesList.push(new Schedule(offset, lessonsList))
     }
     console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
 }
@@ -219,25 +280,23 @@ function scheduleMutation() {
     }
 }
 
+/** do genetic algorithm  */
+function geneticAlgorithm() {
+    generateFirstGeneration()
+    for (let i = 0; i < GENERATION_EVOLUTION; i++) {
+        countFitness()
+        console.log("Generation ::" + i + ") fines :: " + Array.from(fines)[0])
+        findBestOffSpring()
 
-generateFirstGeneration()
-for (let i = 0; i < GENERATION_EVOLUTION; i++) {
-countFitness()
-console.log("Generation ::" + i  + ") fines :: " + Array.from(fines)[0])
-findBestOffSpring()
+        scheduleCrossbreeding()
+        scheduleMutation()
+        console.log("≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈")
+    }
+    countFitness()
+    console.log("The best schedule has VALUE{FITNESS} :: " + Array.from(fines)[0][1])
+    let bestSchedule = schedulesList[Array.from(fines)[0][0]]
 
-scheduleCrossbreeding()
-scheduleMutation()
-console.log("≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈")
+    printSchedule (bestSchedule)
 }
-countFitness()
-console.log("The best schedule has VALUE{FITNESS} :: " + Array.from(fines)[0][1])
-let bestSchedule = schedulesList[Array.from(fines)[0][0]]
-console.log(123)
 
-console.log(bestSchedule)
-
-
-console.log(123)
-
-
+geneticAlgorithm()
