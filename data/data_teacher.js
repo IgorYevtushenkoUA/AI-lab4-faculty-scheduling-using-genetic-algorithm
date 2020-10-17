@@ -1,0 +1,63 @@
+import {Teacher} from "../plurals/Teacher.js";
+
+export const data_teachers_map = {
+    "V.S. Protsenko": new Teacher(0, "V.S. Protsenko", ["Haskell"], 'l/p'),
+    "V.V. Bublyk": new Teacher(1, "V.V. Bublyk", ["Methods of object-oriented programming", "l/p"], "l/p"),
+    "O.P. Zhezherun": new Teacher(2, "O.P. Zhezherun", ["System programming"], "l/p"),
+    "D.I. Cherkasov": new Teacher(3, "D.I. Cherkasov", ["Basic network technologies"], "l/p"),
+    "О.В. Kiriyenko": new Teacher(4, "О.В. Kiriyenko", ["Computer virology"], "l/p"),
+    "N.M. Gulaeva": new Teacher(5, "N.M. Gulaeva", ["Databases"], "l/p"),
+    "T.A. Babich": new Teacher(6, "T.A. Babich", ["Applied architecture enterprise level programs in Java", "Methods and tools of office programming", "Architecture of enterprise level applications"], "l/p"),
+    "S.A. Yaremko": new Teacher(7, "S.A. Yaremko", ["Databases"], "p"),
+    "O.O. Franks": new Teacher(8, "O.O. Franks", ["Programming under iOS", "Fundamentals of artificial intelligence"], "l/p"),
+    "A.S. Shabinsky": new Teacher(9, "A.S. Shabinsky", ["Basic network technologies", "Object-oriented analysis and programming design"], "l/p"),
+    "M.A Korniychuk": new Teacher(10, "M.A Korniychuk", ["Web Search Engine Optimization applications"], "l/p"),
+    "A.O. Afonin": new Teacher(11, "A.O. Afonin", ["Multimedia technology", "Software systems design"], "l/p"),
+    "V.M. Mikhalevich": new Teacher(12, "V.M. Mikhalevich", ["Probability theory and mathematical statistics"], "l/p"),
+    "O.V. Oletskiy": new Teacher(13, "O.V. Oletskiy", ["Front-end Back-end technology web applications"], "l/p"),
+
+    "A.V. Buckwheat": new Teacher(14, "A.V. Buckwheat", ["Multitasking and parallel programming"], "l/p"),
+    "A.A. Sidko": new Teacher(15, "A.A. Sidko", ["Multitasking and parallel programming"], "p"),
+    "A.M. Upland": new Teacher(16, "A.M. Upland", ["Software systems design"], "p"),
+    "VV Gorborukov": new Teacher(17, "VV Gorborukov", ["XML technology"], "p"),
+    "О.В. Oletsky": new Teacher(18, "", ["О.В. Oletsky"], "l/p"),
+    "O. Belyakova": new Teacher(19, "O. Belyakova", ["Fundamentals of IT law"], "l/p"),
+    "O.V Kravchenko": new Teacher(20, "O.V Kravchenko", ["Basics of the Scrum framework"], "l/p"),
+    "N.Yu. Shchestyuk": new Teacher(21, "N.Yu. Shchestyuk", ["Methods and means of information processing"], "l/p"),
+    "V.V. Huminsky": new Teacher(22, "V.V. Huminsky", ["Intelligent networks"], "l/p"),
+    "G.I. Malashonok": new Teacher(23, "G.I. Malashonok", ["Multitasking and parallel programming"], "l/p"),
+    "D.I. Morozov": new Teacher(24, "D.I. Morozov", ["Information coding systems"], ""),
+    "Ya.I. Voznyuk": new Teacher(25, "Ya.I. Voznyuk", ["Electronics and digital electronics"], "l/p"),
+
+
+}
+
+export const data_teachers_arr = [
+    new Teacher(0, "V.S. Protsenko", ["Haskell"], 'l/p'),
+    new Teacher(1, "V.V. Bublyk", ["Methods of object-oriented programming", "l/p"], "l/p"),
+    new Teacher(2, "O.P. Zhezherun", ["System programming"], "l/p"),
+    new Teacher(3, "D.I. Cherkasov", ["Basic network technologies"], "l/p"),
+    new Teacher(4, "О.В. Kiriyenko", ["Computer virology"], "l/p"),
+    new Teacher(5, "N.M. Gulaeva", ["Databases"], "l/p"),
+    new Teacher(6, "T.A. Babich", ["Applied architecture enterprise level programs in Java"], "l/p"),
+    new Teacher(7, "S.A. Yaremko", ["Databases"], "p"),
+    new Teacher(8, "O.O. Franks", ["Programming under iOS", "Fundamentals of artificial intelligence"], "l/p"),
+    new Teacher(9, "A.S. Shabinsky", ["Basic network technologies"], "l/p"),
+    new Teacher(10, "M.A Korniychuk", ["Web Search Engine Optimization applications"], "l/p"),
+    new Teacher(11, "A.O. Afonin", ["Multimedia technology"], "l/p"),
+    new Teacher(12, "V.M. Mikhalevich", ["Probability theory and mathematical statistics"], "l/p"),
+    new Teacher(13, "O.V. Oletskiy", ["Front-end Back-end technology web applications"], "l/p"),
+
+    new Teacher(14, "A.V. Buckwheat", ["Multitasking and parallel programming"], "l/p"),
+    new Teacher(15, "A.A. Sidko", ["Multitasking and parallel programming"], "p"),
+    new Teacher(16, "A.M. Upland", ["Software systems design"], "p"),
+    new Teacher(17, "VV Gorborukov", ["XML technology"], "p"),
+    new Teacher(18, "О.В. Oletsky", ["XML technology"], "l/p"),
+    new Teacher(19, "O. Belyakova", ["Fundamentals of IT law"], "l/p"),
+    new Teacher(20, "O.V Kravchenko", ["Basics of the Scrum framework"], "l/p"),
+    new Teacher(21, "N.Yu. Shchestyuk", ["Methods and means of information processing"], "l/p"),
+    new Teacher(22, "V.V. Huminsky", ["Intelligent networks"], "l/p"),
+    new Teacher(23, "G.I. Malashonok", ["Multitasking and parallel programming"], "l/p"),
+    new Teacher(24, "D.I. Morozov", ["Information coding systems"], ""),
+    new Teacher(25, "Ya.I. Voznyuk", ["Electronics and digital electronics"], "l/p"),
+]
