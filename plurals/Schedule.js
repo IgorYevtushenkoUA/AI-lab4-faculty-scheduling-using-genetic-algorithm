@@ -8,6 +8,6 @@ export class Schedule {
     get getScheduleID()             {return this._scheduleID}
     get getScheduleLessons()        {return this._scheduleLessons}
     set setScheduleID(id)           {this._scheduleID = id}
-    set setScheduleLessons(lessons) {this._scheduleLessons = lessons}
+    setScheduleLessons(lessons) {this._scheduleLessons = lessons}
 
 }
