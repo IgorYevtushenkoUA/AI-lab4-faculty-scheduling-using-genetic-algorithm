@@ -16,9 +16,8 @@ let schedulesList = []
 let fines = new Map()
 const OFFSETS = 10
 const BEST_OFFSETS = OFFSETS / 2
-const GENERATION_EVOLUTION = 2
+const GENERATION_EVOLUTION = 20
 
-// let teacher = data_teachers_arr[]
 /**
  * @param {[]} data
  * @returns {number}
@@ -66,7 +65,7 @@ function generateFirstGeneration() {
                 // Lesson
                 let lesson = new Lesson(id, disciplineName, disciplineType, teacher.getTeacherName, group, auditory.getAuditoryName, timeInterval.getWeekDay, timeInterval.getMaxDayLessons)
                 //Schedule
-                console.log(lesson)
+                // console.log(lesson)
                 schedule.push(new Schedule(id, lesson))
             }
         }
@@ -97,6 +96,9 @@ function countFitness() {
         }
         fines.set(i, carma)
     }
+    for (let i of fines) {
+        console.log(i)
+    }
 }
 
 /** @returns {Map<index, carma{fitness}>} */
@@ -115,26 +117,44 @@ function findBestOffSpring() {
     schedulesList = bestOffset
 }
 
+/**
+ * Змішати 2 розклади
+ * @param {number} schedulesListLength
+ * @returns {any[] | string}
+ */
+function mixLessonsInSchedule(schedulesListLength = schedulesList.length) {
+    let random1 = getRandomNum(schedulesList.length)
+    let random2 = getRandomNum(schedulesList.length)
+    let schedule1 = schedulesList[random1]
+    let schedule2 = schedulesList[random2]
+    // todo check let "l1 = getRandomNum(schedulesList[i].length)"
+    let l1 = getRandomNum(schedulesListLength)
+    schedule1 = schedule1.slice(0, l1)
+    schedule2 = schedule2.slice(l1, schedulesListLength)
+    schedule1 = schedule1.concat(schedule2)
+    return schedule1
+}
+
 /** Схрещування найкращих екземплярів */
 function scheduleCrossbreeding() {
     let newScheduleList = []
     let scheduleIndex = 0;
+    let schedulesListLength = schedulesList[0].length
     for (let i = 0; i < OFFSETS; i++) {
         if (getRandomNum(3) === 0) {
-            newScheduleList.push(schedulesList[scheduleIndex++])
+            if (scheduleIndex < schedulesList.length)
+                newScheduleList.push(schedulesList[scheduleIndex++])
+            else {
+                newScheduleList.push(mixLessonsInSchedule(schedulesListLength))
+            }
         } else {
-            let random1 = getRandomNum(schedulesList.length)
-            let random2 = getRandomNum(schedulesList.length)
-            let schedule1 = schedulesList[random1]
-            let schedule2 = schedulesList[random2]
-            let l1 = getRandomNum(schedulesList[i].length)
-            schedule1 = schedule1.slice(0,l1)
-            schedule2 = schedule2.slice(l1,26)
-            schedule1 = schedule1.concat(schedule2)
-            newScheduleList.push(schedule1)
+            newScheduleList.push(mixLessonsInSchedule(schedulesListLength))
         }
     }
     schedulesList = newScheduleList
+    // console.log("scheduleCrossbreeding")
+    // console.log(schedulesList)
+    // console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
 }
 
 /** Мутація */
@@ -144,9 +164,10 @@ function scheduleMutation() {
      */
     function mutation(schedule) {
         let fine = new Fine()
-        for (let i = 0; i < schedule.length; i++) {
+        for (let i = 0; i < schedule[i].length; i++) {
             let lesson = schedule[i].getScheduleLessons
-            if (getRandomNum(3) === 0) {
+            // console.log(lesson)
+            if (getRandomNum(3) !== 0) {
                 if (!fine.isCorrectTeacherForDiscipline(lesson)) {
                     let newTeacher = data_teachers_arr[getRandomElem(data_teachers_arr)].getTeacherName
                     lesson = new Lesson(lesson.getLessonId, lesson.getLessonDiscipline, lesson.getLessonDisciplineType, newTeacher, lesson.getLessonGroup, lesson.getLessonAuditory, lesson.getLessonDay, lesson.getLessonPair)
@@ -177,6 +198,7 @@ function scheduleMutation() {
                         }
                     }
                 }
+                // console.log(lesson)
                 schedule[i] = lesson
             }
         }
@@ -192,12 +214,15 @@ function scheduleMutation() {
 
 
 generateFirstGeneration()
-// for (let i = 0; i < GENERATION_EVOLUTION; i++) {
+for (let i = 0; i < GENERATION_EVOLUTION; i++) {
 countFitness()
+console.log("Generation ::" + i  + ") fines :: " + Array.from(fines)[0])
 findBestOffSpring()
 
 scheduleCrossbreeding()
 scheduleMutation()
 console.log("≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈")
-// }
+}
+countFitness()
+console.log("fines :: " + Array.from(fines)[0])
 
