@@ -14,9 +14,9 @@ import {Fine} from "./Fine.js"
 
 let schedulesList = []
 let fines = new Map()
-const OFFSETS = 10
+const OFFSETS = 4
 const BEST_OFFSETS = OFFSETS / 2
-const GENERATION_EVOLUTION = 10
+const GENERATION_EVOLUTION = 100
 
 function getDay(num) {
     switch (num) {
@@ -141,26 +141,31 @@ function generateFirstGeneration() {
 
 /** count fitness in schedule to know how bad schedule at the moment */
 function countFitness() {
+    let maxCarma = 0
     for (let i = 0; i < schedulesList.length; i++) {
+        maxCarma = 0
         let fine = new Fine()
         let lessons = schedulesList[i].getScheduleLessons
         let carma = 0
         for (let j = 0; j < lessons.length; j++) {
-            let lesson = lessons[i]
+            let lesson = lessons[j]
             carma += fine.isCorrectTeacherForDiscipline(lesson) ? 1 : -1
             carma += fine.isCorrectTeacherForTypeOfDiscipline(lesson) ? 1 : -1
             carma += fine.isCorrectAuditoryTypeForDisciplineType(lesson) ? 1 : -1
             carma += fine.isCorrectAuditorySizeForStudentsGroupSize(lesson) ? 1 : -1
             carma += fine.isCorrectDisciplineForStudentGroup(lesson) ? 1 : -1
+            maxCarma += 5
             // todo check  {schedule[i].length or schedule.length}
             for (let k = 0; k < lessons.length - 1; k++) {
                 let lesson2 = lessons[k]
-                if (fine.isSameLesson(lesson, lesson2)) continue
+                // if (fine.isSameLesson(lesson, lesson2)) continue
                 carma += fine.isUniqueAuditoryForDisciplineAtPairOnDay(lesson, lesson2) ? 1 : -1
+                maxCarma++
             }
         }
         fines.set(i, carma)
     }
+    console.log("MAX FINE :: " + maxCarma)
     for (let i of fines) {
         console.log(i)
     }
@@ -234,24 +239,30 @@ function scheduleMutation() {
         let lessons = schedule.getScheduleLessons
         for (let i = 0; i < lessons.length; i++) {
             let lesson = lessons[i]
-            // console.log(lesson)
+            let zone  = 0
             if (getRandomNum(3) !== 0) {
                 if (!fine.isCorrectTeacherForDiscipline(lesson)) {
+                    zone = 0
                     let newTeacher = data_teachers_arr[getRandomElem(data_teachers_arr)].getTeacherName
                     lesson = new Lesson(lesson.getLessonId, lesson.getLessonDiscipline, lesson.getLessonDisciplineType, newTeacher, lesson.getLessonGroup, lesson.getLessonAuditory, lesson.getLessonDay, lesson.getLessonPair)
                 } else if (!fine.isCorrectTeacherForTypeOfDiscipline) {
+                    zone = 1
                     let newTeacher = data_teachers_arr[getRandomElem(data_teachers_arr)].getTeacherName
                     lesson = new Lesson(lesson.getLessonId, lesson.getLessonDiscipline, lesson.getLessonDisciplineType, newTeacher, lesson.getLessonGroup, lesson.getLessonAuditory, lesson.getLessonDay, lesson.getLessonPair)
                 } else if (!fine.isCorrectAuditoryTypeForDisciplineType) {
+                    zone = 2
                     let newAuditory = data_auditory_arr[getRandomElem(data_auditory_arr)].getAuditoryName
                     lesson = new Lesson(lesson.getLessonId, lesson.getLessonDiscipline, lesson.getLessonDisciplineType, lesson.getLessonTeacher, lesson.getLessonGroup, newAuditory, lesson.getLessonDay, lesson.getLessonPair)
                 } else if (!fine.isCorrectAuditorySizeForStudentsGroupSize) {
+                    zone = 4
                     let newAuditory = data_auditory_arr[getRandomElem(data_auditory_arr)].getAuditoryName
                     lesson = new Lesson(lesson.getLessonId, lesson.getLessonDiscipline, lesson.getLessonDisciplineType, lesson.getLessonTeacher, lesson.getLessonGroup, newAuditory, lesson.getLessonDay, lesson.getLessonPair)
                 } else if (!fine.isCorrectDisciplineForStudentGroup) {
+                    zone = 5
                     let newDiscipline = data_discipline_arr[getRandomElem(data_discipline_arr)].getDisciplineName()
                     lesson = new Lesson(lesson.getLessonId, newDiscipline, lesson.getLessonDisciplineType, lesson.getLessonTeacher, lesson.getLessonGroup, lesson.getLessonAuditory, lesson.getLessonDay, lesson.getLessonPair)
                 } else {
+                    zone = 6
                     for (let j = 0; j < lessons.length - 1; j++) {
                         let lesson2 = lessons[j]
                         if (fine.isSameLesson(lesson, lesson2)) continue
@@ -266,7 +277,6 @@ function scheduleMutation() {
                         }
                     }
                 }
-                // console.log(lesson)
                 lessons[i] = lesson
             }
         }
@@ -285,8 +295,8 @@ function geneticAlgorithm() {
     generateFirstGeneration()
     for (let i = 0; i < GENERATION_EVOLUTION; i++) {
         countFitness()
-        console.log("Generation ::" + i + ") fines :: " + Array.from(fines)[0])
         findBestOffSpring()
+        console.log("Generation ::" + i + ") fines :: " + Array.from(fines)[0])
 
         scheduleCrossbreeding()
         scheduleMutation()
@@ -297,6 +307,10 @@ function geneticAlgorithm() {
     let bestSchedule = schedulesList[Array.from(fines)[0][0]]
 
     printSchedule (bestSchedule)
+
+    // let lessons = bestSchedule.getScheduleLessons
+    // for(let i = 0 ; i < lessons.length; i++)
+    //     console.log(lessons[i])
 }
 
 geneticAlgorithm()
