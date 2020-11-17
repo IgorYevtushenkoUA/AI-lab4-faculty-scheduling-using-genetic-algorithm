@@ -4,7 +4,8 @@ export const data_course_map = {
     "IPZ-3": new Course(0, "IPZ-3", 60,[
         "Haskell",
         "Methods of object-oriented programming",
-        "System programming","Basic network technologies",
+        "System programming",
+        "Basic network technologies",
         "Computer virology",
         "Web Search Engine Optimization applications",
         "Multimedia technology",
@@ -39,7 +40,8 @@ export const data_course_arr = [
     new Course(0, "IPZ-3", 60,[
         "Haskell",
         "Methods of object-oriented programming",
-        "System programming","Basic network technologies",
+        "System programming",
+        "Basic network technologies",
         "Computer virology",
         "Web Search Engine Optimization applications",
         "Multimedia technology",
