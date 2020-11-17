@@ -158,7 +158,7 @@ function countFitness() {
             // todo check  {schedule[i].length or schedule.length}
             for (let k = 0; k < lessons.length - 1; k++) {
                 let lesson2 = lessons[k]
-                // if (fine.isSameLesson(lesson, lesson2)) continue
+                if (k === i) continue
                 carma += fine.isUniqueAuditoryForDisciplineAtPairOnDay(lesson, lesson2) ? 1 : -1
                 maxCarma++
             }
